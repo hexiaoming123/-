@@ -1,0 +1,21 @@
+spring:
+  data:
+    mongodb:
+      uri: mongodb://test:123456@127.0.0.1:27017/test
+  cache:
+    type: redis
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    password:
+    timeout: 20000
+    database: 0
+    jedis:
+      pool:
+        max-active: 8
+        max-wait: -1
+        max-idle: 8
+        min-idle: 0
+  freemarker:
+    suffix: .html
+    content-type: text/html

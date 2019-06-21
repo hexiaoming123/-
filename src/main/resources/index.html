@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script type="text/javascript" src="static/jquery-1.11.2.js"></script>
+</head>
+<body>
+<!--token:${token}-->
+<button onclick="search()" class="button">提交</button>
+
+</body>
+<script>
+  var token = "";
+    $.ajax({
+      // cache: true,
+      //  async:false,
+      type: "get",
+      contentType: "application/json; charset=utf-8",
+      // dataType:"json",
+      url: "http://localhost:8080/token",
+      success: function (data) {
+        console.log(data);
+        token = data;
+      }
+    });
+
+  //下面是个ajax的例子
+  function search() {
+    $.ajax({
+      type: "POST",
+      contentType: "application/json; charset=utf-8",
+      dataType:"json",
+      url: "http://localhost:8080/addUser",
+          data: {},
+      success: function (data) {
+        location.reload();
+        alert(data.message);
+        /*返回以后刷新可以再次提交表单*/
+
+      },
+      /*携带请求头*/
+      beforeSend: function(xhr) {
+        xhr.setRequestHeader("token", token);
+      }
+    });
+  }
+</script>
+</html>
